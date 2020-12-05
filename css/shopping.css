@@ -1,0 +1,94 @@
+.add-items {
+    /* border: black solid 2px; */
+    width: 100%;
+    height: 250px;
+    padding: 25px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add-items h2 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.add-items .input {
+    width: 275px;
+    background-color:rgb(253, 177, 253);
+    border: none;
+    border-bottom: black solid 2px;
+    font-size: 20px;
+    outline: none;
+    margin-top: 20px;
+}
+.add-items .empty-input {
+    /* transform: scale(1.1); */
+    transition: ease-in border-bottom 1s;
+    border-bottom: red solid 2px;
+    margin-top: 2px;
+}
+.add-items p {
+    display: none;
+}
+.add-items .error {
+    display: block;
+    color: red;
+    /* transform: scale(2);
+    transition: all ease-in 1s; */
+}
+.add-items .add-btn {
+    width: 300px;
+    margin-top: 30px;
+    font-size: 25px;
+    border: none;
+    border-radius: 25px;
+    padding: 5px;
+    background-color: rgb(253, 92, 253);
+}
+
+.item-list {
+    margin-top: 35px;
+    
+}
+
+.item-list .item {
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    background-color: rgba(245, 7, 174, 0.247);
+    border-radius: 20px;
+}
+.item-list .item h3 {
+    width: 60%;
+    text-align: left;
+    /* background-color: rgb(0, 255, 0); */
+    border-radius: 20px;
+    padding-left: 5px;
+    transition: ease-in-out 1s;
+}
+
+.item-list .item div {
+    font-size: 20px;
+    width: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+.fa-check {
+    color: rgb(0, 255, 0);
+}
+.fa-times-circle {
+    color: red;
+}
+.checked h3 {
+    background-color: rgb(0, 255, 0);
+    transition: ease-in-out 1s;
+}
+
+.clear {
+    display: block;
+    margin: 50px auto;
+    background-color:  rgb(255, 0, 191);
+}

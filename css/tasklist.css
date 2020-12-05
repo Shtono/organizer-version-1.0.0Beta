@@ -1,0 +1,105 @@
+.add-btn {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    font-size: 50px;
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.37);
+    color: rgb(255, 0, 255);
+    transition: transform 0.1s ease-in;
+    outline: none;
+    transform: rotate(60);
+    align-self: flex-end;
+    margin-right: 20px;
+    margin-top: 35px;
+    
+}
+.add-btn:active {
+    transform:scale(1.5);
+    color: rgb(0, 255, 119);
+} 
+
+.add-task {
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.add-task .input {
+    width: 275px;
+    background-color:rgb(253, 177, 253);
+    border: none;
+    border-bottom: black solid 2px;
+    font-size: 20px;
+    outline: none;
+    margin-top: 20px;
+}
+
+/* .task-list{
+
+} */
+.t-list .task-item {
+    padding: 10px;
+    margin: 10px 5px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.411);
+
+}
+.t-list .task-item .task-title {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+.t-list .task-item .task-title p {
+    display: none;
+    margin-top: 5px;
+    text-align: justify;
+}
+.t-list .task-item .task-title .hide-btn {
+    display: none;
+    justify-self: flex-end;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 3px 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.411);
+}
+.t-list .task-item .task-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 15%;
+}
+.t-list .task-item .task-actions .fa-times-circle {
+    color: red;
+    font-size: 20px;
+}
+.t-list .task-item .task-actions .fa-check {
+    color: green;
+    font-size: 20px;
+}
+.t-list .task-item .task-actions .hide {
+    align-self: flex-end;
+    margin-left: -40px;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 3px 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.411);
+}
+
+.task-list-checked {
+    margin-top: 35px;
+}
+.task-list-checked h3 {
+    background-color: #00FF00;
+    transition: ease-in-out 1s;
+    text-align: left;
+    border-radius: 20px;
+    padding: 5px 0 0 5px
+}

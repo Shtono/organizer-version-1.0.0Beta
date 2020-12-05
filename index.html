@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/style.css">
+    <title>TestApp</title>
+</head>
+
+<body>
+    <div class="info">
+        <div class="left">
+            <p class="logo">Home Organizer</p>
+            <p class="version">Version <span>0.1.2</span></p>
+        </div>
+        <div class="right">
+            <p class="time">
+                <span class="hours"></span>
+                <span class="minutes"></span>
+                <span class="seconds"></span>
+            </p>
+            <p class="date">
+                <span class="day"></span>
+                <span class="month"></span>
+                <span class="year"></span>
+            </p>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="./index.html" class="links current">
+            <i class="fas fa-home fa-2x"></i>
+            <p>Home</p>
+        </a>
+        <a href="./html/shopping.html" class="links">
+            <i class="fas fa-shopping-basket fa-2x"></i>
+            <p>Shopping</p>
+        </a>
+        <a href="./html/tasklist.html" class="links">
+            <i class="fas fa-tasks fa-2x"></i>
+            <p>Task List</p>
+        </a>
+        <a href="./html/homework.html" class="links">
+            <i class="fas fa-couch fa-2x"></i>
+            <p>Home Work</p>
+        </a>
+    </div>
+    <h1>Track your Progress...</h1>
+    <div class="daily-progress">
+        <div>
+            <div class="p-info p-shopping">
+                <h3>Shopping</h3>
+                <p></p>
+            </div>
+            <div class="progress">
+                <div class="p-bar p-bar-shopping"></div>
+            </div>
+            <!-- <i class="fas fa-chevron-down"></i> -->
+        </div>
+        <div>
+            <div class="p-info p-task-list">
+                <h3>Task List</h3>
+                <p></p>
+            </div>
+            <div class="progress">
+                <div class="p-bar p-bar-task-list"></div>
+            </div>
+        </div>
+        <div>
+            <div class="p-info p-home-work">
+                <h3>Home Work</h3>
+                <p></p>
+            </div>
+            <div class="progress">
+                <div class="p-bar p-bar-home-work"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <p>&copy2020 GarageMedia</p>
+    </footer>
+
+    <script src="./app/app.js"></script>
+    <script src="./app/index.js"></script>
+</body>
+
+</html>

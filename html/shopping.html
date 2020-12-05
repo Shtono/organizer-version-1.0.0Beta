@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shopping.css">
+    <title>TestApp</title>
+</head>
+
+<body>
+    <div class="info">
+        <div class="left">
+            <p class="logo">Home Organizer</p>
+            <p class="version">Version <span>0.1.2</span></p>
+        </div>
+        <div class="right">
+            <p class="time">
+                <span class="hours"></span>
+                <span class="minutes"></span>
+                <span class="seconds"></span>
+            </p>
+            <p class="date">
+                <span class="day"></span>
+                <span class="month"></span>
+                <span class="year"></span>
+            </p>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="../index.html" class="links">
+            <i class="fas fa-home fa-2x"></i>
+            <p>Home</p>
+        </a>
+        <a href="./shopping.html" class="links current">
+            <i class="fas fa-shopping-basket fa-2x"></i>
+            <p>Shopping</p>
+        </a>
+        <a href="./tasklist.html" class="links">
+            <i class="fas fa-tasks fa-2x"></i>
+            <p>Task List</p>
+        </a>
+        <a href="./homework.html" class="links">
+            <i class="fas fa-couch fa-2x"></i>
+            <p>Home Work</p>
+        </a>
+    </div>
+
+    <div class="add-items">
+        <h2>Add Items...</h2>
+        <p class="empty-field">Please add item</p>
+        <input type="text" class="input item-input" placeholder="Add item...">
+        <input type="text" class="input quantity-input" placeholder="Add qty...">
+        <button class="btn-primary add-btn">Add</button>
+    </div>
+
+    <ul class="item-list">
+        <!-- <li class="item">
+            <h3>Eggs</h3>
+            <p>6</p>
+            <div class="icons">
+                <i class="far fa-edit"></i>
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </li>
+        <li class="item">
+            <h3>Eggs</h3>
+            <p>26</p>
+            <div class="icons">
+                <i class="far fa-edit"></i>
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </li> -->
+    </ul>
+    <ul class="item-list checked">
+        <!-- <li class="item">
+            <h3>Eggs</h3>
+            <p>26</p>
+            <div class="icons">
+                <i class="far fa-edit"></i>
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </li> -->
+    </ul>
+
+    <button class="clear btn-primary">Clear All</button>
+
+    <footer id="footer">
+        <p>&copy2020 GarageMedia</p>
+    </footer>
+
+    <script src="../app/app.js"></script>
+    <script src="../app/shopping.js"></script>
+</body>
+
+</html>
