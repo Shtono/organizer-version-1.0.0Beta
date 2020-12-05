@@ -136,13 +136,13 @@ function deleteFromLocalStorageChecked(currItem, qty,) {
 }
 
 function clearAll() {
-    // const items = JSON.parse(localStorage.getItem('items'))
-    // const itemschecked = JSON.parse(localStorage.getItem('items'))
-    const empty = [];
-    localStorage.setItem('items', JSON.stringify(empty));
-    localStorage.setItem('itemsChecked', JSON.stringify(empty));
-    ul.innerHTML = '';
-    ulChecked.innerHTML = '';
+    if (confirm('Delete All ?')) {
+        const empty = [];
+        localStorage.setItem('items', JSON.stringify(empty));
+        localStorage.setItem('itemsChecked', JSON.stringify(empty));
+        ul.innerHTML = '';
+        ulChecked.innerHTML = '';
+    }
 }
 
 function Item(item, qty) {
