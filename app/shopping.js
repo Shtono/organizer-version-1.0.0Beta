@@ -71,14 +71,13 @@ function addItemsUnChecked(item, qty) {
 
 function deleteItem(e) {
     if (e.target.classList.contains('fa-times-circle')) {
-        const itemName = e.target.parentElement.parentElement.firstElementChild.textContent;
-        const itemQty = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
-        e.target.parentElement.parentElement.remove();
-        deleteFromLocalStorage(itemName, itemQty)
-        printItemsOnScreen();
-        console.log(e.target);
-
-
+        if (confirm('Delete Item ?')) {
+            const itemName = e.target.parentElement.parentElement.firstElementChild.textContent;
+            const itemQty = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
+            e.target.parentElement.parentElement.remove();
+            deleteFromLocalStorage(itemName, itemQty)
+            printItemsOnScreen();
+        }
     }
     e.preventDefault();
 }
