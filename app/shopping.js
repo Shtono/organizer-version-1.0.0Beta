@@ -83,12 +83,14 @@ function deleteItem(e) {
 }
 function deleteItemChecked(e) {
     if (e.target.classList.contains('fa-times-circle')) {
-        const itemName = e.target.parentElement.parentElement.firstElementChild.textContent;
-        const itemQty = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
-        e.target.parentElement.parentElement.remove();
-        deleteFromLocalStorageChecked(itemName, itemQty)
-        printItemsOnScreen();
-        console.log(e.target);
+        if (confirm('Delete item ?')) {
+            const itemName = e.target.parentElement.parentElement.firstElementChild.textContent;
+            const itemQty = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
+            e.target.parentElement.parentElement.remove();
+            deleteFromLocalStorageChecked(itemName, itemQty)
+            printItemsOnScreen();
+            console.log(e.target);
+        }
     }
     e.preventDefault();
 }
