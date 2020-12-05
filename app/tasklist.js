@@ -80,23 +80,27 @@ function hideInfo(e) {
 
 function deleteItem(e) {
     if (e.target.classList.contains('fa-times-circle')) {
-        let title = e.target.parentElement.previousElementSibling.firstElementChild.textContent;
-        let body = e.target.parentElement.previousElementSibling.firstElementChild.nextElementSibling.textContent;
-        let task = new Task(title, body);
-        e.target.parentElement.parentElement.remove();
-        removeFromLocalStorage(task);
-        printTasksOnScreen();
+        if (confirm('Delete task ?')) {
+            let title = e.target.parentElement.previousElementSibling.firstElementChild.textContent;
+            let body = e.target.parentElement.previousElementSibling.firstElementChild.nextElementSibling.textContent;
+            let task = new Task(title, body);
+            e.target.parentElement.parentElement.remove();
+            removeFromLocalStorage(task);
+            printTasksOnScreen();
+        }
     }
     e.preventDefault;
 }
 function deleteItemChecked(e) {
     if (e.target.classList.contains('fa-times-circle')) {
-        let title = e.target.parentElement.previousElementSibling.firstElementChild.textContent;
-        let body = e.target.parentElement.previousElementSibling.firstElementChild.nextElementSibling.textContent;
-        let task = new Task(title, body);
-        e.target.parentElement.parentElement.remove();
-        removeFromLocalStorageChecked(task);
-        printTasksOnScreenChecked();
+        if (confirm('Delete Item ?')) {
+            let title = e.target.parentElement.previousElementSibling.firstElementChild.textContent;
+            let body = e.target.parentElement.previousElementSibling.firstElementChild.nextElementSibling.textContent;
+            let task = new Task(title, body);
+            e.target.parentElement.parentElement.remove();
+            removeFromLocalStorageChecked(task);
+            printTasksOnScreenChecked();
+        }
     }
     e.preventDefault;
 }
