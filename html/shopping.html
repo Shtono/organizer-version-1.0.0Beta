@@ -53,7 +53,7 @@
         <h2>Add Items...</h2>
         <p class="empty-field">Please add item</p>
         <input type="text" class="input item-input" placeholder="Add item...">
-        <input type="text" class="input quantity-input" placeholder="Add qty...">
+        <input type="number" class="input quantity-input" placeholder="Add qty...">
         <button class="btn-primary add-btn">Add</button>
     </div>
 
@@ -92,6 +92,28 @@
         <p>&copy2020 GarageMedia</p>
     </footer>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyB4UbPtoDetsJnlCIdUfPZuSx_AaxqxX80",
+            authDomain: "home-organizer-v1.firebaseapp.com",
+            projectId: "home-organizer-v1",
+            storageBucket: "home-organizer-v1.appspot.com",
+            messagingSenderId: "458454774867",
+            appId: "1:458454774867:web:dcc84237c229130e0482a6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
     <script src="../app/app.js"></script>
     <script src="../app/shopping.js"></script>
 </body>
