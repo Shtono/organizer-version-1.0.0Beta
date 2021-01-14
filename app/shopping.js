@@ -8,190 +8,109 @@ const errorMessage = document.querySelector('.empty-field');
 
 // Event Listeners
 addBtn.addEventListener('click', addItems);
-ul.addEventListener('click', deleteItem);
-ul.addEventListener('click', checked);
-ulChecked.addEventListener('click', deleteItemChecked);
-ulChecked.addEventListener('click', unchecked);
-clearBtn.addEventListener('click', clearAll);
-
-
-function checked(e) {
-    if (e.target.classList.contains('fa-check')) {
-        e.target.parentElement.parentElement.firstElementChild.style.backgroundColor = 'greenyellow';
-        const cI = e.target.parentElement.parentElement.firstElementChild.textContent;
-        const cQ = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
-        deleteFromLocalStorage(cI, cQ)
-        addChecked(cI, cQ);
-        e.target.parentElement.parentElement.remove();
-        printItemsOnScreen();
+ul.addEventListener('click', e => {
+    if (e.target.className.includes('fa-times-circle')) {
+        const id = e.target.parentElement.parentElement.getAttribute('data-id');
+        if (confirm('Are You Sure ?')) {
+            db.collection('items').doc(id).delete();
+            setScrollPosition();
+            ul.innerHTML = '';
+            ulChecked.innerHTML = '';
+            getData();
+            setTimeout(() => {
+                window.scrollTo(0, getScrollPosition())
+            }, 50)
+        }
     }
-}
-function unchecked(e) {
-    if (e.target.classList.contains('fa-backward')) {
-        const item = e.target.parentElement.parentElement.firstElementChild.textContent;
-        const qty = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
-        addItemsUnChecked(item, qty);
-        deleteFromLocalStorageChecked(item, qty);
-        e.target.parentElement.parentElement.remove();
-        printItemsOnScreen();
+});
+ul.addEventListener('click', e => {
+    if (e.target.className.includes('fa-check')) {
+        checkItems(e.target.parentElement.parentElement.getAttribute('data-id'));
+        setScrollPosition();
+        ul.innerHTML = '';
+        ulChecked.innerHTML = '';
+        getData();
+        setTimeout(() => {
+            window.scrollTo(0, getScrollPosition())
+        }, 50)
+
     }
+})
+ulChecked.addEventListener('click', e => {
+    if (e.target.className.includes('fa-backward')) {
+        unCheckItems(e.target.parentElement.parentElement.getAttribute('data-id'));
+        setScrollPosition();
+        ul.innerHTML = '';
+        ulChecked.innerHTML = '';
+        getData();
+        setTimeout(() => {
+            window.scrollTo(0, getScrollPosition())
+        }, 50)
+    }
+});
+ulChecked.addEventListener('click', e => {
+    if (e.target.className.includes('fa-times-circle')) {
+        const id = e.target.parentElement.parentElement.getAttribute('data-id');
+        if (confirm('Are You Sure ?')) {
+            db.collection('items').doc(id).delete();
+            setScrollPosition();
+            ul.innerHTML = '';
+            ulChecked.innerHTML = '';
+            getData();
+            setTimeout(() => {
+                window.scrollTo(0, getScrollPosition())
+            }, 50)
+        }
+    }
+});
+clearBtn.addEventListener('click', () => {
+    if (confirm('Are You sure You want to delete all Items ?')) {
+        document.querySelectorAll('li').forEach(doc => {
+            const id = doc.getAttribute('data-id');
+            db.collection('items').doc(id).delete();
+            ul.innerHTML = '';
+            ulChecked.innerHTML = '';
+        })
+    }
+});
+
+function getData(callback) {
+    db.collection('items').onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type === 'added') {
+                printItemsOnScreen(change.doc.data(), change.doc.id);
+            }
+        })
+    })
 }
 
 function addItems() {
-    if (itemInput.value !== '') {
-        const item = itemInput.value;
-        const qty = quantityInput.value;
+    const itemName = itemInput.value.trim(),
+        quantity = quantityInput.value.trim();
 
-        const itemObject = new Item(item, qty)
-
-        addToLocalStorage(itemObject)
-        printItemsOnScreen();
+    if (itemName) {
+        const item = { item: itemName, qty: quantity, checked: false };
+        db.collection('items').add(item);
+        console.log(item);
         itemInput.value = '';
         quantityInput.value = '';
     } else {
-        itemInput.classList.add('empty-input');
-        errorMessage.classList.add('error');
-        setTimeout(() => {
-            itemInput.classList.remove('empty-input');
-            errorMessage.classList.remove('error');
-        }, 2000);
-    }
-
-}
-function addChecked(item, qty) {
-    const itemObject = new Item(item, qty);
-    addToLocalStorageChecked(itemObject);
-    printItemsOnScreen();
-}
-function addItemsUnChecked(item, qty) {
-    const itemObject = new Item(item, qty)
-    addToLocalStorage(itemObject)
-    printItemsOnScreen();
-}
-
-function deleteItem(e) {
-    if (e.target.classList.contains('fa-times-circle')) {
-        if (confirm('Delete Item ?')) {
-            const itemName = e.target.parentElement.parentElement.firstElementChild.textContent;
-            const itemQty = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
-            e.target.parentElement.parentElement.remove();
-            deleteFromLocalStorage(itemName, itemQty)
-            printItemsOnScreen();
-        }
-    }
-    e.preventDefault();
-}
-function deleteItemChecked(e) {
-    if (e.target.classList.contains('fa-times-circle')) {
-        if (confirm('Delete item ?')) {
-            const itemName = e.target.parentElement.parentElement.firstElementChild.textContent;
-            const itemQty = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent;
-            e.target.parentElement.parentElement.remove();
-            deleteFromLocalStorageChecked(itemName, itemQty)
-            printItemsOnScreen();
-            console.log(e.target);
-        }
-    }
-    e.preventDefault();
-}
-
-function addToLocalStorage(item) {
-    let items;
-    if (localStorage.getItem('items') === null) {
-        items = [];
-    } else {
-        items = JSON.parse(localStorage.getItem('items'))
-    }
-
-    items.push(item);
-    localStorage.setItem('items', JSON.stringify(items))
-};
-function addToLocalStorageChecked(item) {
-    let items;
-    if (localStorage.getItem('itemsChecked') === null) {
-        items = [];
-    } else {
-        items = JSON.parse(localStorage.getItem('itemsChecked'))
-    }
-
-    items.push(item);
-    localStorage.setItem('itemsChecked', JSON.stringify(items))
-};
-
-function deleteFromLocalStorage(currItem, qty,) {
-    const items = JSON.parse(localStorage.getItem('items'))
-    items.forEach((item, index) => {
-        if (item.item === currItem && item.qty === qty) {
-            items.splice(index, 1)
-        }
-    })
-    localStorage.setItem('items', JSON.stringify(items))
-}
-function deleteFromLocalStorageChecked(currItem, qty,) {
-    const items = JSON.parse(localStorage.getItem('itemsChecked'))
-    items.forEach((item, index) => {
-        if (item.item === currItem && item.qty === qty) {
-            items.splice(index, 1)
-        }
-    })
-    localStorage.setItem('itemsChecked', JSON.stringify(items))
-}
-
-function clearAll() {
-    if (confirm('Delete All ?')) {
-        const empty = [];
-        localStorage.setItem('items', JSON.stringify(empty));
-        localStorage.setItem('itemsChecked', JSON.stringify(empty));
-        ul.innerHTML = '';
-        ulChecked.innerHTML = '';
+        alert('You must add an Item');
     }
 }
 
-function Item(item, qty) {
-    this.item = item;
-    this.qty = qty;
+function checkItems(id) {
+    db.collection('items').doc(id).update({ checked: true })
+}
+function unCheckItems(id) {
+    db.collection('items').doc(id).update({ checked: false })
 }
 
-
-
-// addToLocalStorage(eggs);
-// addToLocalStorage(milk);
-
-// const items = localStorage.getItem('items');
-// console.log(items);
-
-// localStorage.clear();
-
-function printItemsOnScreen() {
-    let items;
-    let itemsChecked;
-    if (localStorage.getItem('items') !== null) {
-        items = JSON.parse(localStorage.getItem('items'));
-        let html = '';
-        items.forEach(item => {
-            html += `
-            <li class="item">
-                <h3>${item.item}</h3>
-                <p>${item.qty}</p>
-                <div class="icons">
-                    <i class="fas fa-check"></i>
-                    <i class="fas fa-times-circle"></i>
-                </div>
-            </li>
-            `
-            ul.innerHTML = html;
-
-        });
-    }
-
-
-
-    if (localStorage.getItem('itemsChecked') !== null) {
-        itemsChecked = JSON.parse(localStorage.getItem('itemsChecked'));
-        let htmlChecked = '';
-        itemsChecked.forEach(item => {
-            htmlChecked += `
-        <li class="item">
+function printItemsOnScreen(item, id) {
+    if (item.checked) {
+        let html = `
+        <li class="item" data-id="${id}">
             <h3>${item.item}</h3>
             <p>${item.qty}</p>
             <div class="icons">
@@ -199,34 +118,29 @@ function printItemsOnScreen() {
                 <i class="fas fa-times-circle"></i>
             </div>
         </li>
-        `
-        });
-        ulChecked.innerHTML = htmlChecked;
+        `;
+        ulChecked.innerHTML += html;
+    } else {
+        let html = `
+        <li class="item" data-id="${id}">
+            <h3>${item.item}</h3>
+            <p>${item.qty}</p>
+            <div class="icons">
+                <i class="fas fa-check"></i>
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </li>
+        `;
+        ul.innerHTML += html;
     }
 }
-// function printItemsOnScreenChecked() {
-//     let items;
-//     if (localStorage.getItem('items') !== null) {
-//         items = JSON.parse(localStorage.getItem('items'));
-//     }
 
-//     let html = '';
-//     items.forEach(item => {
-//         html += `
-//         <li class="item">
-//             <h3>${item.item}</h3>
-//             <p>${item.qty}</p>
-//             <div class="icons">
-//                 <i class="fas fa-check"></i>
-//                 <i class="fas fa-times-circle"></i>
-//             </div>
-//         </li>
-//         `
-//         ul.innerHTML = html;
+getData();
 
-//     })
-// }
+function setScrollPosition() {
+    localStorage.setItem('position', window.scrollY)
+}
+function getScrollPosition() {
+    return localStorage.getItem('position');
 
-printItemsOnScreen();
-
-
+}
